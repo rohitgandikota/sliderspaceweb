@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Erasing Conceptual Knowledge from Language Models</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="description" content="Erasing concepts from language models by addressing innocence, seamlessness and specificity through low-rank model editing" />
+<meta property="og:title" content="Erasing Conceptual Knowledge from Language Models" />
+<meta property="og:description" content="Erasing concepts from language models by addressing innocence, seamlessness and specificity through low-rank model editing" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" /> 
+<meta name="twitter:title" content="Erasing Conceptual Knowledge from Language Models" />
+<meta name="twitter:description" content="Erasing concepts from language models by addressing innocence, seamlessness and specificity through low-rank model editing" />
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Math&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+<link href="style.css" rel="stylesheet">
+
+<style>
+.relatedthumb {
+  float:left; width: 200px; margin: 3px 10px 7px 0;
+}
+.relatedblock {
+  clear: both;
+  display: inline-block;
+}
+.bold-sc {
+  font-variant: small-caps;
+  font-weight: bold;
+}
+.cite, .citegroup {
+  margin-bottom: 8px;
+}
+:target {
+  background-color: yellow;
+}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FD12LWN557"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date()); gtag('config', 'G-FD12LWN557');
+</script>
+
+</head>
+<body class="nd-docs">
+<div class="nd-pageheader">
+ <div class="container">
+ <h1 class="lead">
+ Erasing 
+ <nobr class="widenobr">Conceptual Knowledge</nobr>
+from
+ <nobr class="widenobr">Language Models</nobr>
+ </h1>
+<address>
+  <nobr><a href="https://rohitgandikota.github.io/" target="_blank"
+  >Rohit Gandikota</a><sup>1</sup>,</nobr>
+  <nobr><a href="https://sfeucht.github.io" target="_blank"
+  >Sheridan Feucht</a><sup>1</sup>,</nobr>
+  <nobr><a href="https://people.math.harvard.edu/~smarks/" target="_blank"
+  >Samuel Marks</a><sup>1,2</sup>,</nobr>
+  <nobr><a href="https://baulab.info/" target="_blank"
+  >David Bau</a><sup>1</sup></nobr>
+ <br>
+  <nobr><sup>1</sup><a href="https://khoury.northeastern.edu/" target="_blank"
+  >Northeastern University</a>,</nobr>
+  <nobr><sup>2</sup><a href="https://www.anthropic.com" target="_blank"
+  >Anthropic</a></nobr>;
+
+</address>
+ </div>
+</div><!-- end nd-pageheader -->
+
+<div class="container">
+<div class="row justify-content-center text-center">
+
+<p>
+<a href="https://arxiv.org/pdf/2410.02760" class="d-inline-block p-3 align-top" target="_blank"><img height="100" width="78" src="images/paper-thumb.png" style="border:1px solid; margin: 0 38px;" alt="ArXiv Preprint thumbnail" data-nothumb=""><br>ArXiv<br>Preprint</a>
+<a href="https://github.com/rohitgandikota/erasing-llm" class="d-inline-block p-3 align-top" target="_blank"><img height="100" width="78" src="images/code-thumb.png" style="border:1px solid; margin: 0 38px;" alt="Github code thumbnail" data-nothumb=""><br>Source Code<br>Github</a>
+<a href="https://elm.baulab.info/models/elm-wmdp/" class="d-inline-block p-3 align-top" target="_blank"><img height="100" width="78" src="images/data-thumb.png" style="border:1px solid; margin: 0 38px;" alt="Data thumbnail" data-nothumb=""><br>Peft<br>ELM Weights</a>
+<a href="https://huggingface.co/collections/baulab/elm-6715d68576da0cd1a89c0c04" class="d-inline-block p-3 align-top" target="_blank"><img height="100" width="78" src="images/hf-models-thumb.png" style="border:1px solid; margin: 0 38px;" alt="HF Models thumbnail" data-nothumb=""><br>Huggingface<br>ELM Models</a>
+<!-- <a href="https://huggingface.co/spaces/baulab/Erasing-Concepts-In-Diffusion" class="d-inline-block p-3 align-bottom" target="_blank"><img height="78" width="104" src="images/demo3x4-thumb.png" style="border:1px solid" alt="Huggingface demo thumbnail" data-nothumb=""><br>Huggingface<br>Demo</a> -->
+</p>
+
+<div class="card" style="max-width: 1020px;">
+<div class="card-block">
+<h3>Why is it critical to think about concept erasure in LLMs?</h3>
+<p>
+    <p>When erasing a piece of knowledge from language model, it is easy to destroy the model or not erase anything at all. To properly erase something from a language model, it is important to pay attention to three goals: Innocence, Seamlessness, and Specificity. </p>
+    <p><b>Innocence:</b> the erased model should not exhibit any traces of knowledge. <b>Seamlessness:</b> the model should not generate gibberish text upon encountering the concept, but rather act like it has never heard of it. <b>Specificity:</b> the erasure should not effect the general capabilities of the original model.</p>
+<p>
+We introduce a new method called <b>Erasure of Language Memory (ELM)</b>. ELM stands apart from previous approaches because it addresses all the three at the same time.
+</p>
+</div><!--card-block-->
+</div><!--card-->
+
+</div><!--row-->
+  
+<div class="row">
+<div class="col">
+  
+<figure class="center_image" style="margin-top: 30px">
+  <center><img src="images/paper/method.png" style="width:100%; max-width:800px"></center>
+  <figcaption>An overview of our desiderata for concept erasure and Erasure of Language Memory method. The erased model must stay innocent of the erased concept, while still being fluent when prompted for the concept indicating seamless edit. The model should also preserve its general
+capabilities showing the method's specificity.</figcaption>
+</figure>
+
+  <h2>Why erase a concept from language model? </h2>
+<p>Concept erasure in language models addresses several critical issues. It helps mitigate <a href="https://www.nytimes.com/2023/12/27/business/media/new-york-times-open-ai-microsoft-lawsuit.html">copyright infringement risks</a> by removing potentially reproduced content. It enhances privacy protection by eliminating <a href="https://arxiv.org/abs/2311.17035">sensitive personal information</a> retained from training data. Safety is improved by erasing knowledge of <a href="https://www.wmdp.ai">dangerous concepts</a>. Selective removal of certain concepts aids in reducing <a href="https://dl.acm.org/doi/10.1145/3597307">model biases</a>. Lastly, concept erasure offers a more efficient alternative to full model retraining when updating or correcting specific information, saving significant time and computational resources.</p>
+
+<h2>How to erase concepts from language models?</h2>
+  <p>Our Erasure of Language Memory (ELM) method is designed to address all three criteria for effective concept erasure. ELM employs a multi-objective approach that balances erasure, retention of general knowledge, and conditional fluency. The method works by fine-tuning low-rank adapters on Large Language Models (LLMs) using three key loss terms:</p>
+    
+<ol>
+    <li><strong>Erasing Objective (L<sub>erase</sub>):</strong> This term encourages the model to reduce the likelihood of generating content related to the erased concept. It's defined as:<br>
+        <center><img src="images/paper/erase_pre.png" alt="Equation for Erasing Objective"  style="width:100%; max-width:400px" /></center>
+        
+        <center><img src="images/paper/erase.png" alt="Equation for Erasing Objective"  style="width:100%; max-width:400px" /></center>
+            
+        <p>Where P<sup>erased</sup><sub>&theta;</sub> is a modified probability distribution that reduces the likelihood of the erased concept. </p>
+
+        <p>This objective ensures that when processing input from the erase dataset, the model's predicted probabilities diverge from the original distribution, effectively reducing the likelihood of tokens associated with the concept being erased. We increase the likelihood of concept c<sub>+</sub> (e.g., "novice in bioweapons" or "expert in biology") occuring and reduce the likelihood of concept c<sub>-</sub> (e.g., "expert in bioweapons")</p>
+    </li>
+
+    <li><strong>Retention Objective (L<sub>retain</sub>):</strong> This term helps preserve the model's performance on unrelated tasks. It's formulated as:<br>
+        <center><img src="images/paper/retain.png" alt="Equation for Retention Objective"  style="width:100%; max-width:400px" /></center>
+        <p>This objective encourages the model to maintain its original prediction probabilities when processing input tokens from the retain dataset, ensuring that unrelated knowledge remains intact.</p>
+    </li>
+
+    <li><strong>Conditional Fluency Objective (L<sub>fluency</sub>):</strong> This term ensures the model maintains text coherence when prompted with content related to erased concepts. It's defined as:<br>
+        <center><img src="images/paper/fluency.png" alt="Equation for Conditional Fluency Objective"  style="width:100%; max-width:500px" /></center>
+        <p>This objective operates in two stages: First, it generates a sequence of synthesized training tokens by applying the erasing principle to the original model. Then, it trains the erased model to produce fluent and contextually different content in response to prompts about the erased concept.</p>
+    </li>
+</ol>
+
+<p>By optimizing this combined loss, ELM achieves effective concept erasure while maintaining model fluency and general capabilities. </p>
+
+<h2>Erasing Weapons of Mass Destruction Proxy (WMDP) Knowledge</h2>
+    <p>We evaluated ELM's performance on the Weapons of Mass Destruction Proxy (WMDP) dataset, focusing on biosecurity and cybersecurity concepts. We found:</p>
+    <center><img src="images/paper/wmdp.png" alt="Evaluations on WMDP"  style="width:100%; max-width:800px" /></center>
+    <p>ELM erases the concept of bio and cyber threat such that the erased model almost acts like a random baseline while preserving overall capabilities across different models. However, we find that ELM has better perplexity when prompted for the erased concepts compared to the state of the art baselines. </p>
+
+<h2>How important are the loss terms for ELM?</h2>
+    <p>We ablate each loss term and also replace the loss terms with random objectives. For example, for erasing loss, we replace the groundtruth logits with a random tensor. Similarly, for consistency term, we replace the text with a random exerpt of text from wiki-text. We found:</p>
+    <center><img src="images/paper/ablation.png" alt="Ablations of ELM on WMDP"  style="width:100%; max-width:700px" /></center>
+    <p>Ablating erasing loss results in significantly higher WMDP scores, indicating incomplete erasure. Retain terms is very essential to maintain the model's capabilities post-erasure. Without the fluency term, the model shows compromised generation quality when prompted with erased concepts, highlighting its role in maintaining contextual relevance. </p>
+
+
+<h2>How does ELM effect the processing of tokens inside the model?</h2>
+    <p>To estimate the presence of erased knowledge within the internal representations of a model, we conduct the probing analysis, training a linear probe using the same setup as used by <a href="https://www.wmdp.ai">Li et al. (2024).</a></p>
+    <center><img src="images/paper/probes.png" alt="Ablations of ELM on WMDP"  style="width:100%; max-width:1000px" /></center>
+    <p>Probe accuracies reveal that both ELM and RMU do not show traces of knowledge in the internal layers. However, when looked at activations norms across the layers, both ELM and RMU induce out-of-distribution activations in early layers for the forget set, but while RMU continues to exhibits persistent activation norm disruption across all layers. ELM activation norms return to baseline behavior in middle layers. This suggests altered initial processing of erased concepts during knowlege retrieval while preserving text-prediction behavior in later stages.</p>
+    
+
+<h2>How does ELM effect the processing of tokens inside the model?</h2>
+    <p>To demonstrate ELM's versatility in erasing broader conceptual knowledge, we applied it to remove information about the Harry Potter literary universe from language models. We compare ELM against <a href="https://www.wmdp.ai">RMU</a> and <a href="https://arxiv.org/abs/2310.02238">WhoIsHarryPotter (WHP)</a> methods for Llama-2-7B Chat. </p>
+    <center><img src="images/paper/hp.png" alt="Experiments of ELM on Harry Potter"  style="width:100%; max-width:750px" /></center>
+    <p>ELM achieves a balance between effective knowledge erasure (low HP MCQ score) and maintaining fluent generation (low reverse-perplexity). While WHP model maintains fluency but fails to effectively erase the target knowledge. RMU proved ineffective in erasing the Harry Potter within our initial hyperparameter range. However, a more extensive sweep may be necessary to conclusively determine its limitations in this context.</p>
+
+  
+<h2>How to cite</h2>
+    
+<p>The paper can be cited as follows.
+</p>
+
+<div class="card">
+<h3 class="card-header">bibliography</h3>
+<div class="card-block">
+<p style="text-indent: -3em; margin-left: 3em;" class="card-text clickselect">
+Rohit Gandikota, Sheridan Feucht, Samuel Marks, David Bau. "<em>Erasing Conceptual Knowledge from Language Models</em>"
+arXiv preprint arXiv:2410.02760 (2024).</nobr>
+</p>
+</div>
+<h3 class="card-header">bibtex</h3>
+<div class="card-block">
+<pre class="card-text clickselect">
+@article{gandikota2024elm,
+  title={Erasing Conceptual Knowledge from Language Models},
+  author={Rohit Gandikota and Sheridan Feucht and Samuel Marks and David Bau},
+  journal={arXiv preprint arXiv:2410.02760},
+  year={2024}
+}
+</pre>
+</div>
+</div>
+</p>
+
+</div>
+</div><!--row -->
+</div> <!-- container -->
+
+<footer class="nd-pagefooter">
+  <div class="row">
+    <div class="col-6 col-md text-center">
+      <a href="https://baulab.info/">About the Bau Lab</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+<script>
+$(document).on('click', '.clickselect', function(ev) {
+  var range = document.createRange();
+  range.selectNodeContents(this);
+  var sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(range);
+});
+</script>
+</html>
+

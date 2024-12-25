@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Unified Concept Editing in Diffusion Models</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="description" content="Addressing bias, copyright, and offensive content in diffusion models by directly calculating parameter changes." />
+<meta property="og:title" content="Unified Concept Editing in Diffusion Models" />
+<meta property="og:description" content="Addressing bias, copyright, and offensive content in diffusion models by directly calculating parameter changes." />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" /> 
+<meta name="twitter:title" content="Unified Concept Editing in Diffusion Models" />
+<meta name="twitter:description" content="Addressing bias, copyright, and offensive content in diffusion models by directly calculating parameter changes." />
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Math&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+<link href="style.css" rel="stylesheet">
+
+<style>
+.relatedthumb {
+  float:left; width: 200px; margin: 3px 10px 7px 0;
+}
+.relatedblock {
+  clear: both;
+  display: inline-block;
+}
+.bold-sc {
+  font-variant: small-caps;
+  font-weight: bold;
+}
+.cite, .citegroup {
+  margin-bottom: 8px;
+}
+:target {
+  background-color: yellow;
+}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FD12LWN557"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date()); gtag('config', 'G-FD12LWN557');
+</script>
+
+</head>
+<body class="nd-docs">
+<div class="nd-pageheader">
+ <div class="container">
+ <h1 class="lead">
+ Unified
+ <nobr class="widenobr">Concept Editing</nobr>
+ in 
+ <nobr class="widenobr">Diffusion Models</nobr>
+ </h1>
+<address>
+  <nobr><a href="https://rohitgandikota.github.io/" target="_blank"
+  >Rohit Gandikota</a><sup>1</sup>,</nobr>
+  <nobr><a href="https://orgadhadas.github.io/" target="_blank"
+  >Hadas Orgad</a><sup>2</sup>,</nobr>
+  <nobr><a href="https://belinkov.com/" target="_blank"
+  >Yonatan Belinkov</a><sup>2</sup>,</nobr>
+  <nobr><a href="https://joaanna.github.io/" target="_blank"
+  >Joanna Materzy&#324;ska</a><sup>3</sup>,</nobr>
+  <nobr><a href="https://baulab.info/" target="_blank"
+  >David Bau</a><sup>1</sup></nobr>
+ <br>
+  <nobr><sup>1</sup><a href="https://khoury.northeastern.edu/" target="_blank"
+  >Northeastern University</a>,</nobr>
+  <nobr><sup>2</sup><a href="https://cs.technion.ac.il/" target="_blank"
+  >Technion - IIT</a></nobr>;
+  <nobr><sup>3</sup><a href="https://www.csail.mit.edu/" target="_blank"
+  >MIT CSAIL</a></nobr>
+
+</address>
+ </div>
+</div><!-- end nd-pageheader -->
+
+<div class="container">
+<div class="row justify-content-center text-center">
+
+<p>
+<a href="https://arxiv.org/pdf/2308.14761.pdf" class="d-inline-block p-3 align-top" target="_blank"><img height="100" width="78" src="images/paper-thumb.png" style="border:1px solid; margin: 0 38px;" alt="ArXiv Preprint thumbnail" data-nothumb=""><br>ArXiv<br>Preprint</a>
+<a href="https://github.com/rohitgandikota/unified-concept-editing" class="d-inline-block p-3 align-top" target="_blank"><img height="100" width="78" src="images/code-thumb.png" style="border:1px solid; margin: 0 38px;" alt="Github code thumbnail" data-nothumb=""><br>Source Code<br>Github</a>
+<!-- <a href="https://unified.baulab.info/weights/uce_models/" class="d-inline-block p-3 align-top" target="_blank"><img height="100" width="78" src="images/data-thumb.png" style="border:1px solid; margin: 0 38px;" alt="Data thumbnail" data-nothumb=""><br>Fine-Tuned<br>Model  Weights</a> -->
+<!-- <a href="https://huggingface.co/spaces/baulab/Erasing-Concepts-In-Diffusion" class="d-inline-block p-3 align-bottom" target="_blank"><img height="78" width="104" src="images/demo3x4-thumb.png" style="border:1px solid" alt="Huggingface demo thumbnail" data-nothumb=""><br>Huggingface<br>Demo</a> -->
+</p>
+
+<div class="card" style="max-width: 1020px;">
+<div class="card-block">
+<h3>How to fix multiple issues with diffusion model weights?</h3>
+<p>
+<p>
+Text-to-image models suffer from various safety issues that may limit their suitability for deployment.
+Previous methods have separately addressed individual issues of bias, copyright, and offensive content in text-to-image models. However, in the real world, all of these issues appear simultaneously in the same model.
+
+</p>
+<p>
+In this paper, we present a method that tackles those diverse issues with a single approach. 
+  Our method, Unified Concept Editing (UCE), edits the model without training using <b>a closed-form solution conditioned on cross attention outputs</b>, and scales seamlessly to concurrent edits on text-conditional diffusion models.
+UCE enables direct editing of concepts based on phrases and attributes without use of new training data, supporting rapid iteration.
+Key advantages versus finetuning approaches include: efficient scaling of editing multiple concepts, precise concept changes through direct modification of model weights, avoidance of interference with protected or unrelated concepts, and rapid iteration from fast closed-form editing
+</p>
+</div><!--card-block-->
+</div><!--card-->
+
+</div><!--row-->
+  
+<div class="row">
+<div class="col">
+  
+<figure class="center_image" style="margin-top: 30px">
+  <center><img src="images/paper/intro.png" style="width:100%; max-width:800px"></center>
+  <figcaption>In a unified way, UCE can debias, erase and moderate concepts in diffusion models. Unlike previous model editing methods that address each application individually, our method can simultaneously edit multiple concepts with minimal interference
+  </figcaption>
+</figure>
+
+  <h2> Why debias/erase/moderate concepts from diffusion models? </h2>
+  <p>Since large-scale models like Stable Diffusion are trained on massive datasets, they often learn concerning capabilities like generating nudity 
+    or imitating styles/content without permission. This has created risks: Stable Diffusion can be used 
+    to <a href="https://www.washingtonpost.com/technology/2023/02/13/ai-porn-deepfakes-women-consent/">generate nonconsensual deepfake porn</a>, 
+    <a href="https://www.washingtonpost.com/comics/2023/02/14/ai-in-illustration/">mimic artists' work</a>, 
+    <a href="https://www.theverge.com/2023/2/6/23587393/ai-art-copyright-lawsuit-getty-images-stable-diffusion">reproduce copyrighted/trademarked content</a>, and
+    <a href="https://www.bloomberg.com/graphics/2023-generative-ai-bias/">amplify stereotypes about race and gender</a>.
+   Such issues pose serious challenges for institutions releasing models. </p>
+  <p>   
+  There are methods that address these concerns separately, but they do not scale well to editing multiple concepts together. 
+    We propose a closed-form solution that can address these challenges in a unified way at scale, editing multiple concepts concurrently with minimal interference.
+  </p>
+  
+<h2> How to edit concepts simultaneously in diffusion models? </h2>
+  <figure class="center_image" style="margin-top: 30px">
+    <center><img src="images/paper/method.png" style="width:100%; max-width:600px"></center>
+    <figcaption> We update the weights of cross attention linear layers in closed-form by conditioning its outputs for the concepts to edit and preserve. Our method, UCE, does not require any training data collection or any gradient descent. UCE can debias, erase, and moderate concepts together in a single edit and scales to editing multiple concepts while minimizing interference with unedited concepts.
+    </figcaption>
+  </figure>
+  <p>We edit the cross attention weights by conditioning new target output for the concept embeddings to edit and preserve the previoud outputs for concepts to preserve. We minimize the loss shown in the figure above through this closed-form update:
+  </p>
+  <center><img src="images/paper/uce_closed.png" style="width:500px;padding-bottom:10px;"></center>
+  <p> Our method generalizes previous state-of-the-art model editing methods like <a href="https://arxiv.org/pdf/2303.08084.pdf">TIME</a> and 
+    <a href="https://openreview.net/pdf?id=MkbcAHIYgyS">MEMIT</a>. Our method can also be generalised to editing any linear projection.</p>
+<h2> Erasing an artistic style</h2>
+  <p>Models like Stable Diffusion can mimic <a href="https://proximacentaurib.notion.site/About-Image-Synthesis-Style-Studies-4dcbd554f4b0403d802dc5b26fb3b8e9">the styles of more than 1500 artists</a>. Not all artists are excited about their art being mimicked by genrative models and wish to be opted-out of these models' vocubulary.
+  Recent works have been working on <a href="https://spawning.ai">filtering the training data</a> to accomodate the opt-out requests from individuals. Eventhough such filtering would exclude the artists from future models that are trained on the filtered dataset, model editing may still be needed for certain artists that aren't fully addressed. We propose using UCE that is scalable, fast, and displays minimal interference with other artists. 
+  To erase style, we use the name of the artist and steer them towards general prompts like "art" or "".</p>
+  <figure class="center_image" style="margin-top: 30px">
+    <center><img src="images/paper/style1.png" style="width:100%; max-width:800px"></center>
+    <figcaption> Erasing 1 artist. On left, we show the original vs edited for the intended erasure. On the right, we show the interference with unerased artists. We find that our method efficiently erases while having the least inteference.
+    </figcaption>
+  </figure>
+
+  <figure class="center_image" style="margin-top: 30px">
+    <center><img src="images/paper/style2.png" style="width:100%; max-width:800px"></center>
+    <figcaption> Erasing 5 artists at a time. On left, we show the original vs edited for the intended erasure. On the right, we show the interference with unerased artists. We find that our method efficiently erases while having the least inteference.
+    </figcaption>
+  </figure>
+
+  <figure class="center_image" style="margin-top: 30px">
+    <center><img src="images/paper/style3.png" style="width:100%; max-width:800px"></center>
+    <figcaption> Erasing 10 artists at a time. On left, we show the original vs edited for the intended erasure. On the right, we show the interference with unerased artists. We find that our method efficiently erases while having the least inteference.
+    </figcaption>
+  </figure>
+
+  <figure class="center_image" style="margin-top: 30px">
+    <center><img src="images/paper/style4.png" style="width:100%; max-width:800px"></center>
+    <figcaption> Erasing 50 artists at a time. On left, we show the original vs edited for the intended erasure. On the right, we show the interference with unerased artists. We find that our method efficiently erases while having the least inteference.
+    </figcaption>
+  </figure>
+<h2> Debiasing a profession across gender and race</h2>
+  <p> Previous debiasing methods address only dual attributed biases, however, attributes like race are multi-faceted. We propose a multi-faceted debiasing formulation that can be scaled for multiple concepts. Our method has strong debiasing results, improving the race and gender representation in diffusion models.
+  <center><img src="images/paper/debias_equation.png" style="width:500px;padding-bottom:10px;"></center>
+    <p>This formulation allows UCE to address multi-attribute biases like race. We show some quantitative results of our method displaying improved race and gender diversity.</p>
+    <figure class="center_image" style="margin-top: 30px">
+    <center><img src="images/paper/gender1.png" style="width:100%; max-width:800px"></center>
+    <figcaption> Our method improves gender representation for professions in diffusion models.
+    </figcaption>
+  </figure>
+  
+  <figure class="center_image" style="margin-top: 30px">
+    <center><img src="images/paper/gender2.png" style="width:100%; max-width:800px"></center>
+    <figcaption> Our method improves gender representation for professions in diffusion models.
+    </figcaption>
+  </figure>
+  
+  <figure class="center_image" style="margin-top: 30px">
+    <center><img src="images/paper/gender3.png" style="width:100%; max-width:800px"></center>
+    <figcaption> Our method improves gender representation for professions in diffusion models.
+    </figcaption>
+  </figure>
+
+   
+ <figure class="center_image" style="margin-top: 30px">
+    <center><img src="images/paper/race1.png" style="width:100%; max-width:800px"></center>
+    <figcaption> Our method improves race representation for professions in diffusion models.
+    </figcaption>
+  </figure>
+
+   
+ <figure class="center_image" style="margin-top: 30px">
+    <center><img src="images/paper/race2.png" style="width:100%; max-width:800px"></center>
+    <figcaption> Our method improves race representation for professions in diffusion models.
+    </figcaption>
+  </figure>
+
+<h2> Moderating an unsafe concept</h2>
+  <p>We test our method on moderating unsafe concepts like <i>"nudity"</i>. We compare our method with <a href="https://erasing.baulab.info">ESD-u and ESD-x</a>. We find that our method has similar performance as ESD-x when erasing a single concept, but our method shows minimal interference with other concepts in the model. 
+  We also see that moderating multiple unsafe concepts like <i>"harm, violence, child abuse, blood, nudity"</i>, our method shows a stronger moderation effect on the model as seen in the figure below.</p>
+  <figure class="center_image" style="margin-top: 30px">
+    <center><img src="images/paper/nudity_bar.png" style="width:100%; max-width:800px"></center>
+    <figcaption> We show the percentage reduction in unsafe nudity samples compared to Original SD as classified by <a href="https://github.com/notAI-tech/NudeNet">Nudenet</a>. We find that our method has a superior performance when moderating multiple unsafe concepts.
+    </figcaption>
+  </figure>
+  
+<h2>How to cite</h2>
+
+<p>The paper can be cited as follows.
+</p>
+
+<div class="card">
+<h3 class="card-header">bibliography</h3>
+<div class="card-block">
+<p style="text-indent: -3em; margin-left: 3em;" class="card-text clickselect">
+Rohit Gandikota, Hadas Orgad, Yonatan Belinkov, Joanna Materzy&#324;ska, David Bau. "<em>Unified Concept Editing in Diffusion Models.</em>"
+IEEE/CVF Winter Conference on Applications of Computer Vision (WACV) 2024.</nobr>
+</p>
+</div>
+<h3 class="card-header">bibtex</h3>
+<div class="card-block">
+<pre class="card-text clickselect">
+@article{gandikota2024unified,
+  title={Unified Concept Editing in Diffusion Models},
+  author={Rohit Gandikota and Hadas Orgad and Yonatan Belinkov and Joanna Materzy\'nska and David Bau},
+  journal={IEEE/CVF Winter Conference on Applications of Computer Vision},
+  year={2024}
+}
+</pre>
+</div>
+</div>
+</p>
+
+</div>
+</div><!--row -->
+</div> <!-- container -->
+
+<footer class="nd-pagefooter">
+  <div class="row">
+    <div class="col-6 col-md text-center">
+      <a href="https://baulab.info/">About the Bau Lab</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+<script>
+$(document).on('click', '.clickselect', function(ev) {
+  var range = document.createRange();
+  range.selectNodeContents(this);
+  var sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(range);
+});
+</script>
+</html>
+
