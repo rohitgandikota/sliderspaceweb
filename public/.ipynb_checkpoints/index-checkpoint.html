@@ -94,18 +94,13 @@ gtag('js', new Date()); gtag('config', 'G-FD12LWN557');
 
 <div class="card" style="max-width: 1020px;">
 <div class="card-block">
-<h3>How to fix multiple issues with diffusion model weights?</h3>
+<h3>How do we make diffusion models more controllable and interpretable?</h3>
 <p>
 <p>
-Text-to-image models suffer from various safety issues that may limit their suitability for deployment.
-Previous methods have separately addressed individual issues of bias, copyright, and offensive content in text-to-image models. However, in the real world, all of these issues appear simultaneously in the same model.
-
+Text-to-image diffusion models can create infinite diverse images from a single prompt, but we don't really understand how they organize their creative knowledge. Until now, users had to discover interesting creative variations through trial and error - tweaking text descriptions, combining different styles, or referencing other images. This process relies heavily on user creativity rather than understanding what the model actually knows about different concepts.
 </p>
 <p>
-In this paper, we present a method that tackles those diverse issues with a single approach. 
-  Our method, Unified Concept Editing (UCE), edits the model without training using <b>a closed-form solution conditioned on cross attention outputs</b>, and scales seamlessly to concurrent edits on text-conditional diffusion models.
-UCE enables direct editing of concepts based on phrases and attributes without use of new training data, supporting rapid iteration.
-Key advantages versus finetuning approaches include: efficient scaling of editing multiple concepts, precise concept changes through direct modification of model weights, avoidance of interference with protected or unrelated concepts, and rapid iteration from fast closed-form editing
+We present SliderSpace - where instead of requiring users to find these creative directions, SliderSpace automatically discovers them from the model's knowledge. Given a concept prompt like "toy", SliderSpace identifies the key visual variations the model knows about it and turns them into simple sliders. No need to tell it what to look for - SliderSpace finds these creative controls on its own.
 </p>
 </div><!--card-block-->
 </div><!--card-->
