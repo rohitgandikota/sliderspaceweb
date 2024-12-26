@@ -5,7 +5,7 @@ h2 {
   margin-top: 3ex;
 }
 /* Yellow: Eternal Sunshine of the Spotless Mind */
-.color-primary-0 { color: #FFC7C7 }
+.color-primary-0 { color: #FFE1E1 }
 .color-primary-1 { color: #199099 }
 .color-primary-2 { color: #969518 }
 .color-primary-3 { color: #1AA16A }
@@ -16,7 +16,7 @@ h2 {
   margin-bottom: 1.5rem;
   color: #EECCEE;
   text-align: center;
-  background-color: #FFC7C7;
+  background-color: #FFE1E1;
 }
 
 .nd-pageheader a, .nd-pageheader a.likelink {
@@ -28,7 +28,7 @@ h2 {
   padding: 1rem;
   color: #EECCEE;
   text-align: center;
-  background-color: #FFC7C7;
+  background-color: #FFE1E1;
 }
 
 .nd-pagefooter a {
