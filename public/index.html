@@ -121,7 +121,7 @@ We introduce SliderSpace - a way to unlock the creative potential of diffusion m
   </figcaption>
 </figure>
 
-  <h2> Why debias/erase/moderate concepts from diffusion models? </h2>
+  <h2> Why discover directions automatically? </h2>
   <p>Since large-scale models like Stable Diffusion are trained on massive datasets, they often learn concerning capabilities like generating nudity 
     or imitating styles/content without permission. This has created risks: Stable Diffusion can be used 
     to <a href="https://www.washingtonpost.com/technology/2023/02/13/ai-porn-deepfakes-women-consent/">generate nonconsensual deepfake porn</a>, 
@@ -134,7 +134,7 @@ We introduce SliderSpace - a way to unlock the creative potential of diffusion m
     We propose a closed-form solution that can address these challenges in a unified way at scale, editing multiple concepts concurrently with minimal interference.
   </p>
   
-<h2> How to edit concepts simultaneously in diffusion models? </h2>
+<h2> How does SliderSpace discover meaningful directions? </h2>
   <figure class="center_image" style="margin-top: 30px">
     <center><img src="images/paper/method.png" style="width:100%; max-width:600px"></center>
     <figcaption> We update the weights of cross attention linear layers in closed-form by conditioning its outputs for the concepts to edit and preserve. Our method, UCE, does not require any training data collection or any gradient descent. UCE can debias, erase, and moderate concepts together in a single edit and scales to editing multiple concepts while minimizing interference with unedited concepts.
