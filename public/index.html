@@ -122,17 +122,8 @@ We introduce SliderSpace - a way to unlock the creative potential of diffusion m
 </figure>
 
   <h2> Why discover directions automatically? </h2>
-  <p>Since large-scale models like Stable Diffusion are trained on massive datasets, they often learn concerning capabilities like generating nudity 
-    or imitating styles/content without permission. This has created risks: Stable Diffusion can be used 
-    to <a href="https://www.washingtonpost.com/technology/2023/02/13/ai-porn-deepfakes-women-consent/">generate nonconsensual deepfake porn</a>, 
-    <a href="https://www.washingtonpost.com/comics/2023/02/14/ai-in-illustration/">mimic artists' work</a>, 
-    <a href="https://www.theverge.com/2023/2/6/23587393/ai-art-copyright-lawsuit-getty-images-stable-diffusion">reproduce copyrighted/trademarked content</a>, and
-    <a href="https://www.bloomberg.com/graphics/2023-generative-ai-bias/">amplify stereotypes about race and gender</a>.
-   Such issues pose serious challenges for institutions releasing models. </p>
-  <p>   
-  There are methods that address these concerns separately, but they do not scale well to editing multiple concepts together. 
-    We propose a closed-form solution that can address these challenges in a unified way at scale, editing multiple concepts concurrently with minimal interference.
-  </p>
+  <p>Recent diffusion models learn from billions of text-images pairs and gain rich knowledge about different visual concepts. Having users manually specify control directions - like "make it more red" or "make it more realistic" - only scratches the surface of what these models understand. It's similar to trying to organize a massive library by only looking at book covers - you'll miss many important categories and connections that exist within. </p>
+    <p>By letting the model reveal its own understanding, SliderSpace uncovers creative possibilities that might not be obvious to humans. For example, when exploring the concept "monster", SliderSpace discovers not just obvious controls like size and color, but also nuanced variations in creature anatomy, texture patterns, and environmental elements that we might not think to specify manually. This automated discovery helps us better utilize the full creative potential that exists within these AI models.</p>
   
 <h2> How does SliderSpace discover meaningful directions? </h2>
   <figure class="center_image" style="margin-top: 30px">
@@ -140,11 +131,15 @@ We introduce SliderSpace - a way to unlock the creative potential of diffusion m
     <figcaption> We update the weights of cross attention linear layers in closed-form by conditioning its outputs for the concepts to edit and preserve. Our method, UCE, does not require any training data collection or any gradient descent. UCE can debias, erase, and moderate concepts together in a single edit and scales to editing multiple concepts while minimizing interference with unedited concepts.
     </figcaption>
   </figure>
-  <p>We edit the cross attention weights by conditioning new target output for the concept embeddings to edit and preserve the previoud outputs for concepts to preserve. We minimize the loss shown in the figure above through this closed-form update:
-  </p>
-  <center><img src="images/paper/uce_closed.png" style="width:500px;padding-bottom:10px;"></center>
-  <p> Our method generalizes previous state-of-the-art model editing methods like <a href="https://arxiv.org/pdf/2303.08084.pdf">TIME</a> and 
-    <a href="https://openreview.net/pdf?id=MkbcAHIYgyS">MEMIT</a>. Our method can also be generalised to editing any linear projection.</p>
+
+    <p>SliderSpace's discovery process is guided by three key principles:</p>
+    <ul>
+        <li class="mb-2"><strong>Unsupervised Discovery:</strong> Directions emerge naturally from the model's learned manifold without imposing predefined attributes</li>
+        <li class="mb-2"><strong>Semantic Orthogonality:</strong> Each discovered direction represents a distinct semantic aspect, preventing redundant controls</li>
+        <li class="mb-2"><strong>Distribution Consistency:</strong>Transformations by a discovered direction remain consistent across different random seeds and prompt variations</li>
+    </ul>
+
+    
 <h2> Erasing an artistic style</h2>
   <p>Models like Stable Diffusion can mimic <a href="https://proximacentaurib.notion.site/About-Image-Synthesis-Style-Studies-4dcbd554f4b0403d802dc5b26fb3b8e9">the styles of more than 1500 artists</a>. Not all artists are excited about their art being mimicked by genrative models and wish to be opted-out of these models' vocubulary.
   Recent works have been working on <a href="https://spawning.ai">filtering the training data</a> to accomodate the opt-out requests from individuals. Eventhough such filtering would exclude the artists from future models that are trained on the filtered dataset, model editing may still be needed for certain artists that aren't fully addressed. We propose using UCE that is scalable, fast, and displays minimal interference with other artists. 
