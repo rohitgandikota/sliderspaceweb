@@ -128,7 +128,7 @@ We introduce SliderSpace - a way to unlock the creative potential of diffusion m
 <h2> How does SliderSpace discover meaningful directions? </h2>
   <figure class="center_image" style="margin-top: 30px">
     <center><img src="images/paper/method.png" style="width:100%; max-width:600px"></center>
-    <figcaption> We update the weights of cross attention linear layers in closed-form by conditioning its outputs for the concepts to edit and preserve. Our method, UCE, does not require any training data collection or any gradient descent. UCE can debias, erase, and moderate concepts together in a single edit and scales to editing multiple concepts while minimizing interference with unedited concepts.
+    <figcaption> Given a prompt, SliderSpace first generates images and extracts the CLIP features. We then compute the principle directions of variations in CLIP features and align the each slider with extracted principle components. Each slider is therefore trained to represent a unique semantic direction that are relevant in the diffusion model’s knowledge of the prompt.
     </figcaption>
   </figure>
 
