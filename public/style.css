@@ -15,25 +15,25 @@ h2 {
 .nd-pageheader {
   padding: 2rem 15px;
   margin-bottom: 1.5rem;
-  color: #111111;
+  color: #FFFFFF;
   text-align: center;
   background-color: #FF0000;
 }
 
 .nd-pageheader a, .nd-pageheader a.likelink {
-  color: #111111;
+  color: #FFFFFF;
 }
 
 .nd-pagefooter {
   margin-top: 1.5rem;
   padding: 1rem;
-  color: #111111;
+  color: #FFFFFF;
   text-align: center;
   background-color: #FF0000;
 }
 
 .nd-pagefooter a {
-  color: #111111;
+  color: #FFFFFF;
 }
 
 .nd-pageheader .container {
