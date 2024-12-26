@@ -4,9 +4,9 @@ body, td, th {
 h2 {
   margin-top: 3ex;
 }
-/* 8F1111 */
+/* FCF99B */
 /* Yellow: Eternal Sunshine of the Spotless Mind */
-.color-primary-0 { color: #8F1111 }
+.color-primary-0 { color: #FCF99B }
 .color-primary-1 { color: #199099 }
 .color-primary-2 { color: #969518 }
 .color-primary-3 { color: #1AA16A }
@@ -15,25 +15,25 @@ h2 {
 .nd-pageheader {
   padding: 2rem 15px;
   margin-bottom: 1.5rem;
-  color: #FFFFFF;
+  color: #000000;
   text-align: center;
-  background-color: #8F1111;
+  background-color: #FCF99B;
 }
 
 .nd-pageheader a, .nd-pageheader a.likelink {
-  color: #FFFFFF;
+  color: #000000;
 }
 
 .nd-pagefooter {
   margin-top: 1.5rem;
   padding: 1rem;
-  color: #FFFFFF;
+  color: #000000;
   text-align: center;
-  background-color: #8F1111;
+  background-color: #FCF99B;
 }
 
 .nd-pagefooter a {
-  color: #FFFFFF;
+  color: #000000;
 }
 
 .nd-pageheader .container {
