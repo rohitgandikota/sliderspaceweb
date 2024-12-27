@@ -141,77 +141,34 @@ We introduce SliderSpace - a way to unlock the creative potential of diffusion m
     </ul>
 <p>To be precise, SliderSpace first generates a few variations of images from the user defined prompt. It then captures the CLIP features for each individual image and decomposes the directions through PCA. These PCA directions capture the prinicple semantic directions of variations in the diffusion model's knowledge. Once the directions are discovered, SliderSpace trains a slider to capture each individual direction. This way, a slider would steer the diffusion model towards a semantic direction (e.g. "lego" direction for the concept "toy").</p>
     
-<h2> Erasing an artistic style</h2>
-  <p>Models like Stable Diffusion can mimic <a href="https://proximacentaurib.notion.site/About-Image-Synthesis-Style-Studies-4dcbd554f4b0403d802dc5b26fb3b8e9">the styles of more than 1500 artists</a>. Not all artists are excited about their art being mimicked by genrative models and wish to be opted-out of these models' vocubulary.
-  Recent works have been working on <a href="https://spawning.ai">filtering the training data</a> to accomodate the opt-out requests from individuals. Eventhough such filtering would exclude the artists from future models that are trained on the filtered dataset, model editing may still be needed for certain artists that aren't fully addressed. We propose using UCE that is scalable, fast, and displays minimal interference with other artists. 
-  To erase style, we use the name of the artist and steer them towards general prompts like "art" or "".</p>
-  <figure class="center_image" style="margin-top: 30px">
-    <center><img src="images/paper/style1.png" style="width:100%; max-width:800px"></center>
-    <figcaption> Erasing 1 artist. On left, we show the original vs edited for the intended erasure. On the right, we show the interference with unerased artists. We find that our method efficiently erases while having the least inteference.
-    </figcaption>
-  </figure>
+<h2>How is SliderSpace useful?</h2>
+    <p>SliderSpace can be used for decomposing knowledge of diffusion model about a concept. These directions can be used not only for controlling the diffusion model's outputs but also as an interpretability tool to explore the knowledge of a concept. For example, users can explore the concept of art in a pretrained diffusion model or explore the concept of "diversity".</p>
 
-  <figure class="center_image" style="margin-top: 30px">
-    <center><img src="images/paper/style2.png" style="width:100%; max-width:800px"></center>
-    <figcaption> Erasing 5 artists at a time. On left, we show the original vs edited for the intended erasure. On the right, we show the interference with unerased artists. We find that our method efficiently erases while having the least inteference.
-    </figcaption>
-  </figure>
+    <h3>Concept Decomposition</h3>
+      <p>Given a concept like "monster", SliderSpace reveals fascinating insights into how the model think. The discovered controls went far beyond basic attributes, uncovering dimensions like creature anatomy, environmental context, and artistic interpretation. Our measurements showed that images created using these SliderSpace controls were 40% more diverse than base model's generations.</p>
+        
+      <figure class="center_image" style="margin-top: 30px">
+        <center><img src="images/paper/concept.png" style="width:100%; max-width:800px"></center>
+        <figcaption> Erasing 1 artist. On left, we show the original vs edited for the intended erasure. On the right, we show the interference with unerased artists. We find that our method efficiently erases while having the least inteference.
+        </figcaption>
+      </figure>
 
-  <figure class="center_image" style="margin-top: 30px">
-    <center><img src="images/paper/style3.png" style="width:100%; max-width:800px"></center>
-    <figcaption> Erasing 10 artists at a time. On left, we show the original vs edited for the intended erasure. On the right, we show the interference with unerased artists. We find that our method efficiently erases while having the least inteference.
-    </figcaption>
-  </figure>
+    <h3>Exploring Artistic Knowledge of the Model</h3>
+        <p>Instead of relying on artist names or style descriptions, SliderSpace automatically can map out how diffusion models understand artistic style. By analyzing "artwork in the style of a famous artist", it discovered distinct artistic directions. These automatically discovered controls proved remarkably effective - they closely match the diversity of manually curated artist lists that took months to compile. In fact, when compared against a dataset of 4,388 artist styles, SliderSpace achieved comparable diversity with far fewer controls.</p>
+        <p>Our user studies validated this: 72% of participants found SliderSpace's style controls more useful than traditional methods.</p>
+        <figure class="center_image" style="margin-top: 30px">
+            <center><img src="images/paper/art.png" style="width:100%; max-width:800px"></center>
+            <figcaption> Erasing 1 artist. On left, we show the original vs edited for the intended erasure. On the right, we show the interference with unerased artists. We find that our method efficiently erases while having the least inteference.
+            </figcaption>
+          </figure>
 
-  <figure class="center_image" style="margin-top: 30px">
-    <center><img src="images/paper/style4.png" style="width:100%; max-width:800px"></center>
-    <figcaption> Erasing 50 artists at a time. On left, we show the original vs edited for the intended erasure. On the right, we show the interference with unerased artists. We find that our method efficiently erases while having the least inteference.
-    </figcaption>
-  </figure>
-<h2> Debiasing a profession across gender and race</h2>
-  <p> Previous debiasing methods address only dual attributed biases, however, attributes like race are multi-faceted. We propose a multi-faceted debiasing formulation that can be scaled for multiple concepts. Our method has strong debiasing results, improving the race and gender representation in diffusion models.
-  <center><img src="images/paper/debias_equation.png" style="width:500px;padding-bottom:10px;"></center>
-    <p>This formulation allows UCE to address multi-attribute biases like race. We show some quantitative results of our method displaying improved race and gender diversity.</p>
-    <figure class="center_image" style="margin-top: 30px">
-    <center><img src="images/paper/gender1.png" style="width:100%; max-width:800px"></center>
-    <figcaption> Our method improves gender representation for professions in diffusion models.
-    </figcaption>
-  </figure>
-  
-  <figure class="center_image" style="margin-top: 30px">
-    <center><img src="images/paper/gender2.png" style="width:100%; max-width:800px"></center>
-    <figcaption> Our method improves gender representation for professions in diffusion models.
-    </figcaption>
-  </figure>
-  
-  <figure class="center_image" style="margin-top: 30px">
-    <center><img src="images/paper/gender3.png" style="width:100%; max-width:800px"></center>
-    <figcaption> Our method improves gender representation for professions in diffusion models.
-    </figcaption>
-  </figure>
-
-   
- <figure class="center_image" style="margin-top: 30px">
-    <center><img src="images/paper/race1.png" style="width:100%; max-width:800px"></center>
-    <figcaption> Our method improves race representation for professions in diffusion models.
-    </figcaption>
-  </figure>
-
-   
- <figure class="center_image" style="margin-top: 30px">
-    <center><img src="images/paper/race2.png" style="width:100%; max-width:800px"></center>
-    <figcaption> Our method improves race representation for professions in diffusion models.
-    </figcaption>
-  </figure>
-
-<h2> Moderating an unsafe concept</h2>
-  <p>We test our method on moderating unsafe concepts like <i>"nudity"</i>. We compare our method with <a href="https://erasing.baulab.info">ESD-u and ESD-x</a>. We find that our method has similar performance as ESD-x when erasing a single concept, but our method shows minimal interference with other concepts in the model. 
-  We also see that moderating multiple unsafe concepts like <i>"harm, violence, child abuse, blood, nudity"</i>, our method shows a stronger moderation effect on the model as seen in the figure below.</p>
-  <figure class="center_image" style="margin-top: 30px">
-    <center><img src="images/paper/nudity_bar.png" style="width:100%; max-width:800px"></center>
-    <figcaption> We show the percentage reduction in unsafe nudity samples compared to Original SD as classified by <a href="https://github.com/notAI-tech/NudeNet">Nudenet</a>. We find that our method has a superior performance when moderating multiple unsafe concepts.
-    </figcaption>
-  </figure>
+    <h3>Improving Diversity of a Model</h3>
+        <p>We discovered SliderSpace for generic prompts from COCO-30K on SDXL-DMD, a fast 4-step distilled model that typically produces less diverse images than its base SDXL version. SliderSpace improved the diversity score (FID) from 15.52 to 12.12 (lower is better), nearly matching the original model's score of 11.72. This means users can enjoy both fast generation and rich variety. Importantly, these improvements worked across different diffusion architectures, including SDXL, SDXL-Turbo, and FLUX Schnell, showing the method's broad applicability.</p>
+        <figure class="center_image" style="margin-top: 30px">
+            <center><img src="images/paper/diverse.png" style="width:100%; max-width:800px"></center>
+            <figcaption> Erasing 1 artist. On left, we show the original vs edited for the intended erasure. On the right, we show the interference with unerased artists. We find that our method efficiently erases while having the least inteference.
+            </figcaption>
+          </figure>
   
 <h2>How to cite</h2>
 
