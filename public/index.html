@@ -132,13 +132,14 @@ We introduce SliderSpace - a way to unlock the creative potential of diffusion m
     </figcaption>
   </figure>
 
-    <p>SliderSpace's discovery process is guided by three key principles:</p>
+    <p>For a given prompt, diffusion model can generate an endless variety of images. SliderSpace uses this capability to understand how the diffusion model thinks about that prompt. Think of it as studying hundreds of drawings to understand an artist's different interpretations of the same concept. </p>
+<p>To capture this knowledge systematically, SliderSpace uses low rank adapters called sliders. However, finding meaningful variations isn't straightforward - we need a way to identify changes that make sense to humans. This is why SliderSpace uses CLIP, an contrastive model that understands images in ways that is explainable through natural language. By analyzing diffusion models' variations through CLIP's understanding, SliderSpace ensures the discovered controls are meaningful and intuitive. SliderSpace decomposes a concept based on 3 key desiderata:</p>
     <ul>
         <li class="mb-2"><strong>Unsupervised Discovery:</strong> Directions emerge naturally from the model's learned manifold without imposing predefined attributes</li>
         <li class="mb-2"><strong>Semantic Orthogonality:</strong> Each discovered direction represents a distinct semantic aspect, preventing redundant controls</li>
         <li class="mb-2"><strong>Distribution Consistency:</strong>Transformations by a discovered direction remain consistent across different random seeds and prompt variations</li>
     </ul>
-
+<p>To be precise, SliderSpace first generates a few variations of images from the user defined prompt. It then captures the CLIP features for each individual image and decomposes the directions through PCA. These PCA directions capture the prinicple semantic directions of variations in the diffusion model's knowledge. Once the directions are discovered, SliderSpace trains a slider to capture each individual direction. This way, a slider would steer the diffusion model towards a semantic direction (e.g. "lego" direction for the concept "toy").</p>
     
 <h2> Erasing an artistic style</h2>
   <p>Models like Stable Diffusion can mimic <a href="https://proximacentaurib.notion.site/About-Image-Synthesis-Style-Studies-4dcbd554f4b0403d802dc5b26fb3b8e9">the styles of more than 1500 artists</a>. Not all artists are excited about their art being mimicked by genrative models and wish to be opted-out of these models' vocubulary.
