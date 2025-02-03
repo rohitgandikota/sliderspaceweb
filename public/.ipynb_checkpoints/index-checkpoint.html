@@ -53,12 +53,13 @@ gtag('js', new Date()); gtag('config', 'G-FD12LWN557');
 <body class="nd-docs">
 <div class="nd-pageheader">
  <div class="container">
- <h1 class="lead">
+     
+<h1 class="lead">
  SliderSpace:
  <nobr class="widenobr">Decomposing the</nobr>
- Visual Capabilities of
- <nobr class="widenobr">Diffusion Models</nobr>
+ <nobr class="widenobr">Visual Capabilities of Diffusion Models</nobr>
  </h1>
+     
 <address>
   <nobr><a href="https://rohitgandikota.github.io/" target="_blank"
   >Rohit Gandikota</a><sup>1</sup>,</nobr>
@@ -76,7 +77,7 @@ gtag('js', new Date()); gtag('config', 'G-FD12LWN557');
   <nobr><sup>1</sup><a href="https://khoury.northeastern.edu/" target="_blank"
   >Northeastern University</a>,</nobr>
   <nobr><sup>2</sup><a href="https://research.adobe.com" target="_blank"
-  >Adobe Research</a></nobr>;
+  >Adobe Research</a></nobr>
 
 </address>
  </div>
@@ -97,6 +98,13 @@ gtag('js', new Date()); gtag('config', 'G-FD12LWN557');
 <!-- <a href="https://huggingface.co/spaces/baulab/Erasing-Concepts-In-Diffusion" class="d-inline-block p-3 align-bottom" target="_blank"><img height="78" width="104" src="images/demo3x4-thumb.png" style="border:1px solid" alt="Huggingface demo thumbnail" data-nothumb=""><br>Huggingface<br>Demo</a> -->
 </p>
 
+
+<figure class="center_image" style="margin-top: 30px">
+  <center><img src="images/paper/intro.png" style="width:100%; max-width:900px"></center>
+  <figcaption>Given a single prompt, SliderSpace can automatically discover creative direction from the diffusion model's knowledge. Unlike previous methods where users have  to creative to get interesting sliders, SliderSpace extracts the model's creativity and provides the directions as sliders for users to control
+  </figcaption>
+</figure>
+
 <div class="card" style="max-width: 1020px;">
 <div class="card-block">
 <h3>How do we make diffusion models more controllable and interpretable?</h3>
@@ -115,11 +123,7 @@ We introduce SliderSpace - a way to unlock the creative potential of diffusion m
 <div class="row">
 <div class="col">
   
-<figure class="center_image" style="margin-top: 30px">
-  <center><img src="images/paper/intro.png" style="width:100%; max-width:900px"></center>
-  <figcaption>Given a single prompt, SliderSpace can automatically discover creative direction from the diffusion model's knowledge. Unlike previous methods where users have  to creative to get interesting sliders, SliderSpace extracts the model's creativity and provides the directions as sliders for users to control
-  </figcaption>
-</figure>
+
 
   <h2> Why discover directions automatically? </h2>
   <p>Recent diffusion models learn from billions of text-images pairs and gain rich knowledge about different visual concepts. Having users manually specify control directions - like "make it more red" or "make it more realistic" - only scratches the surface of what these models understand. It's similar to trying to organize a massive library by only looking at book covers - you'll miss many important categories and connections that exist within. </p>
@@ -159,15 +163,16 @@ We introduce SliderSpace - a way to unlock the creative potential of diffusion m
         <img src="sliderspace_gifs/dragon/black_metal_dragon_slider_16_21546.gif" style="width: 100%; max-width: 300px">
         <figcaption style="text-align: center">Black Metal Dragon</figcaption>
       </figure>
-    
-      <figure class="center_image" style="margin: 0; flex: 1">
-        <img src="sliderspace_gifs/dragon/tradional_red_dragon_slider_20_21546.gif" style="width: 100%; max-width: 300px">
-        <figcaption style="text-align: center">Traditional Red Dragon</figcaption>
-      </figure>
+      
     
       <figure class="center_image" style="margin: 0; flex: 1">
         <img src="sliderspace_gifs/dragon/purple_dragon_slider_25_392.gif" style="width: 100%; max-width: 300px">
         <figcaption style="text-align: center">Purple Dragon</figcaption>
+      </figure>
+
+        <figure class="center_image" style="margin: 0; flex: 1">
+        <img src="sliderspace_gifs/dragon/tradional_red_dragon_slider_20_21546.gif" style="width: 100%; max-width: 300px">
+        <figcaption style="text-align: center">Traditional Red Dragon</figcaption>
       </figure>
     </div>
 
