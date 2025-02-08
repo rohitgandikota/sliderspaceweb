@@ -43,11 +43,14 @@
 }
 
 /* Style for carousal gifs */
-.carousel-container {
-    max-width: 800px;
+.carousel-outer-container {
+    max-width: 1000px; /* Wider container to accommodate arrows */
     margin: 30px auto;
     position: relative;
-    padding: 0 50px; /* Add padding to make room for the buttons */
+}
+.carousel-image-container {
+    max-width: 800px; /* Original image width */
+    margin: 0 auto;
 }
 .carousel-image {
     width: 100%;
@@ -78,10 +81,10 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 .carousel-button.prev {
-    left: 0;
+    left: -60px; /* Position outside the image */
 }
 .carousel-button.next {
-    right: 0;
+    right: -60px; /* Position outside the image */
 }
 .carousel-select {
     margin: 20px auto;
@@ -324,30 +327,30 @@ const GifCarousel = () => {
     };
 
     return (
-        <div className="carousel-container">
-            <div style={{ position: 'relative' }}>
+        <div className="carousel-outer-container">
+            <div className="carousel-image-container">
                 <img 
                     src={gifs[currentIndex].filename}
                     alt={gifs[currentIndex].name}
                     className="carousel-image"
                 />
-                
-                <button 
-                    onClick={handlePrevious}
-                    className="carousel-button prev"
-                    aria-label="Previous image"
-                >
-                    &#8592;
-                </button>
-                
-                <button 
-                    onClick={handleNext}
-                    className="carousel-button next"
-                    aria-label="Next image"
-                >
-                    &#8594;
-                </button>
             </div>
+            
+            <button 
+                onClick={handlePrevious}
+                className="carousel-button prev"
+                aria-label="Previous image"
+            >
+                &#8592;
+            </button>
+            
+            <button 
+                onClick={handleNext}
+                className="carousel-button next"
+                aria-label="Next image"
+            >
+                &#8594;
+            </button>
 
             <select 
                 value={currentIndex}
@@ -365,6 +368,7 @@ const GifCarousel = () => {
 };
 
 ReactDOM.render(<GifCarousel />, document.getElementById('gif-carousel'));
+</script>
 </script>
     
 </body>
