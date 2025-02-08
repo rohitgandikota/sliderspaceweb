@@ -47,6 +47,7 @@
     max-width: 800px;
     margin: 30px auto;
     position: relative;
+    padding: 0 50px; /* Add padding to make room for the buttons */
 }
 .carousel-image {
     width: 100%;
@@ -57,8 +58,8 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.8);
-    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -66,19 +67,21 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
     font-size: 24px;
     line-height: 1;
     color: #333;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 .carousel-button:hover {
-    background: rgba(255, 255, 255, 1);
+    background: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 .carousel-button.prev {
-    left: 10px;
+    left: 0;
 }
 .carousel-button.next {
-    right: 10px;
+    right: 0;
 }
 .carousel-select {
     margin: 20px auto;
