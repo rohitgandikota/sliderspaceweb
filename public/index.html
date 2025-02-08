@@ -67,6 +67,9 @@
     justify-content: center;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-size: 24px;
+    line-height: 1;
+    color: #333;
 }
 .carousel-button:hover {
     background: rgba(255, 255, 255, 1);
@@ -84,7 +87,6 @@
     border-radius: 4px;
     border: 1px solid #ccc;
     min-width: 200px;
-}
 }
 </style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FD12LWN557"></script>
@@ -332,7 +334,7 @@ const GifCarousel = () => {
                     className="carousel-button prev"
                     aria-label="Previous image"
                 >
-                    ←
+                    &#8592;
                 </button>
                 
                 <button 
@@ -340,7 +342,7 @@ const GifCarousel = () => {
                     className="carousel-button next"
                     aria-label="Next image"
                 >
-                    →
+                    &#8594;
                 </button>
             </div>
 
