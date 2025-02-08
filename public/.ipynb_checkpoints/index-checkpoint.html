@@ -44,12 +44,12 @@
 
 /* Style for carousal gifs */
 .carousel-outer-container {
-    max-width: 1000px; /* Wider container to accommodate arrows */
+    max-width: 1000px;
     margin: 30px auto;
     position: relative;
 }
 .carousel-image-container {
-    max-width: 800px; /* Original image width */
+    max-width: 800px;
     margin: 0 auto;
 }
 .carousel-image {
@@ -81,14 +81,24 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 .carousel-button.prev {
-    left: -60px; /* Position outside the image */
+    left: -60px;
 }
 .carousel-button.next {
-    right: -60px; /* Position outside the image */
+    right: -60px;
+}
+.carousel-select-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+    gap: 10px;
+}
+.carousel-select-label {
+    font-size: 16px;
+    color: #333;
+    white-space: nowrap;
 }
 .carousel-select {
-    margin: 20px auto;
-    display: block;
     padding: 8px;
     border-radius: 4px;
     border: 1px solid #ccc;
@@ -157,13 +167,15 @@ gtag('js', new Date()); gtag('config', 'G-FD12LWN557');
 <!-- <a href="https://huggingface.co/spaces/baulab/Erasing-Concepts-In-Diffusion" class="d-inline-block p-3 align-bottom" target="_blank"><img height="78" width="104" src="images/demo3x4-thumb.png" style="border:1px solid" alt="Huggingface demo thumbnail" data-nothumb=""><br>Huggingface<br>Demo</a> -->
 </p>
 
+<div id="gif-carousel"></div>
+
 <figure class="center_image" style="margin-top: 30px">
 <center><img src="sliderspace_gifs/twitter_teaser_website.gif" style="width:100%; max-width:800px"></center>
     <figcaption> SliderSpace reveals maps of the visual knowledge naturally encoded within diffusion models. It works by decomposing the model's capabilities into intuitive, composable sliders.
     </figcaption>
 </figure>
 
-<div id="gif-carousel"></div>
+
 
 <div class="card" style="max-width: 1020px;">
 <div class="card-block">
@@ -352,17 +364,22 @@ const GifCarousel = () => {
                 &#8594;
             </button>
 
-            <select 
-                value={currentIndex}
-                onChange={handleSelect}
-                className="carousel-select"
-            >
-                {gifs.map((gif, index) => (
-                    <option key={gif.id} value={index}>
-                        {gif.name}
-                    </option>
-                ))}
-            </select>
+            <div className="carousel-select-container">
+                <label className="carousel-select-label">
+                    SliderSpace Discovered Directions for
+                </label>
+                <select 
+                    value={currentIndex}
+                    onChange={handleSelect}
+                    className="carousel-select"
+                >
+                    {gifs.map((gif, index) => (
+                        <option key={gif.id} value={index}>
+                            {gif.name}
+                        </option>
+                    ))}
+                </select>
+            </div>
         </div>
     );
 };
